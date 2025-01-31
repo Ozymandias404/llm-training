@@ -2,3 +2,5 @@ fastapi
 pydantic
 openai
 qdrant_client
+langchain-community
+pypdf
