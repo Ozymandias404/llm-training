@@ -4,7 +4,7 @@ import asyncio
 
 url = "http://127.0.0.1:8000/document" 
 
-async def read():
+async def readInstructionAndSaveToDb():
     file_path = ( "./instruction_yaris.pdf" )
 
     loader = PyPDFLoader(file_path)
@@ -25,4 +25,4 @@ async def read():
             print(f"Error {response.status_code}: {response.text}") 
 
 
-asyncio.run(read())
+asyncio.run(readInstructionAndSaveToDb())
