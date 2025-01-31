@@ -1,7 +1,8 @@
 from langchain_community.document_loaders import PyPDFLoader
-from qdrant_client import QuadrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct, StrictFloat
+import requests
 import asyncio
+
+url = "http://127.0.0.1:8000/document" 
 
 async def read():
     file_path = ( "./instruction_yaris.pdf" )
@@ -15,7 +16,13 @@ async def read():
 
     for page in pages:
         print(f"{page.metadata}\n")
-        #print(page.page_content)
+        data = {"content": page.page_content}
+        response = requests.post(url, json=data) 
+
+        if response.status_code == 200:
+            print(f"Success: {response.json()}")
+        else:
+            print(f"Error {response.status_code}: {response.text}") 
 
 
 asyncio.run(read())
